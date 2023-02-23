@@ -1,22 +1,10 @@
 import express, { Application } from "express";
-import { z } from "zod";
-import { logger } from "./logger";
-import { Todo, Todos } from "./models/Todo";
-
-type Todo = z.infer<typeof Todo>;
-type Todos = z.infer<typeof Todos>;
-
-const todos: Array<Todo> = [
-  { id: "1", todo: "Todo list item 1" },
-  { id: "2", todo: "Todo list item 2" },
-];
+import { todoRouter } from "./v1/routes/todoRoutes";
 
 const app: Application = express();
 
 app.use(express.json());
 
-app.get("/todos", (req, res) => {
-  res.send(todos);
-});
+app.use(todoRouter);
 
 export default app;
