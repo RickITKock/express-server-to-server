@@ -4,7 +4,7 @@
   "description": "This serves as an Express API Template for developer who wish to apply TDD in typescript.",
   "main": "./src/index.ts",
   "scripts": {
-    "test": "jest --watchAll --verbose --detectOpenHandles",
+    "test": "jest --config jest.config.ts --watchAll --verbose --detectOpenHandles",
     "build": "npx tsc --project tsconfig.build.json",
     "start:build": "npx tsc -w --project tsconfig.build.json",
     "start:run": "nodemon build/index.js",
@@ -38,20 +38,8 @@
     "graphql": "^16.6.0",
     "nodemon": "^2.0.20",
     "signale": "^1.4.0",
+    "ts-node": "^10.9.1",
     "winston": "^3.8.2",
     "zod": "^3.19.1"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ]
   }
 }
