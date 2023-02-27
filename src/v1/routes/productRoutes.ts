@@ -1,30 +1,69 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { z } from "zod";
-
-import { Product } from "../../models/Product";
 
 const productRouter = Router();
 
-type Product = z.infer<typeof Product>;
-
 productRouter.get("/", (req, res) => {
-  const products = Array<Product>();
-
-  const newProduct: Product = {
-    id: "1",
-    name: "dummy",
-  };
-  products.push(newProduct);
-
-  res.status(200).json({ data: products });
+  res.status(200).json({ message: "Handling GET requests to /products" });
 });
 
-productRouter.get("/:productId", (req, res) => {
+productRouter
+  .route("/:id")
+  .get((req, res) => {
+    const id = req.params.id;
+
+    if (id === "special") {
+      res.status(200).json({ message: "Hello World" });
+    }
+  })
+  .put((req, res) => {
+    const id = req.params.id;
+
+    if (id === "special") {
+      res.status(200).json({ message: "Hello World" });
+    }
+  })
+  .delete((req, res) => {
+    const id = req.params.id;
+
+    if (id === "special") {
+      res.status(200).json({ message: "Hello World" });
+    }
+  });
+
+productRouter.get("/:productId");
+productRouter.put("/:productId", (req, res) => {
   const id = req.params.productId;
 
   if (id === "special") {
     res.status(200).json({ message: "Hello World" });
   }
 });
+productRouter.delete("/:productId", (req, res) => {
+  const id = req.params.productId;
+
+  if (id === "special") {
+    res.status(200).json({ message: "Hello World" });
+  }
+});
+
+productRouter.post("/", logger, (req, res) => {
+  const product = {
+    id: "0",
+    name: req.body.productName,
+    price: req.body.price,
+  };
+
+  res.status(201).json({ message: "Handling POST requests to /products" });
+});
+
+productRouter.param("id", (req: Request, res: Response, next: NextFunction) => {
+  // console.log("param:\t" + id);
+  next();
+});
+
+function logger(req: Request, res: Response, next: NextFunction) {
+  console.log(req.originalUrl);
+  next();
+}
 
 export { productRouter };

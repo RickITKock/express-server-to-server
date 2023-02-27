@@ -1,8 +1,3 @@
-import { z } from "zod";
+import {} from "mongodb";
 
-export const Product = z.object({
-  id: z.string(),
-  name: z.string(),
-});
-
-export const Products = z.array(Product);
+const productSchema = null;
